@@ -3,12 +3,6 @@
 /*
 	SuperRewards.com postback handling script for App and Game Publishers.
 
-	Each time a user has completed an Offer or Direct Payment for your App or Game we will send your server a Postback. 
-	This Postback includes all of the information you need to award in-game currency to your user. 
-	This script will handle this Postback for you, and store the information in your database.
-
-	Feel free to customize this script as needed.
-
 	You will need a web server running PHP and a MySQL database (or MySQL-like database). 
 	This script uses PHP's PDO which can be configured to use different database types.
 
