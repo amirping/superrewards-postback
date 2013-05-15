@@ -1,4 +1,4 @@
-**SuperRewards.com Postback Handling Scripts for App Publishers.**
+**SuperRewards.com App Postback Handling Scripts for Publishers.**
 
 Configure and drop one of these scripts onto your web server to handle information to you from SuperRewards. Choose a version which best suits your needs and customize as needed.
 
