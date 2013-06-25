@@ -84,7 +84,7 @@ $sig = $_REQUEST['sig']; // Security hash used to verify the authenticity of the
 
 // Sanity check.
 if(!(is_numeric($id) && is_numeric($uid) && is_numeric($oid) && is_numeric($new) && is_numeric($total)))
-	exit(0); // Fail.
+	exit('0'); // Fail.
 
 $result = 1;
 
