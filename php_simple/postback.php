@@ -82,7 +82,15 @@ $new = $_REQUEST['new']; // Number of in-game currency your user has earned by c
 $total = $_REQUEST['total']; // Total number of in-game currency your user has earned on this App.
 $sig = $_REQUEST['sig']; // Security hash used to verify the authenticity of the postback.
 
-// Sanity check.
+/**
+ * Sanity check.
+ *
+ * If you are using alphanumeric user ids, remove the is_numeric($uid) check. Alphanumeric
+ * ids can only be enabled by Super Rewards Support
+ *
+ * If you are using alphanumeric user ids, please ensure that you use the appropriate URL-encoding
+ * for non-text or unicode characters. For example: ~ should be encoded as %7E
+ */
 if(!(is_numeric($id) && is_numeric($uid) && is_numeric($oid) && is_numeric($new) && is_numeric($total)))
 	exit('0'); // Fail.
 
