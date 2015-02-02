@@ -14,11 +14,11 @@
 	3. Automatically setup the database tables for use with this script by passing the setup option in the URL. 
 		Ex: http://www.example.com/app/postback.php?setup=1 
 	4. Test your integration by sending a Test Postback. 
-		See: http://support.playerize.com/entries/22612522-Publishers-Signing-Up-and-Getting-Started#postback_test
+		See: http://docs.superrewards.com/v1.0/docs/notification-postbacks
 	5. Use the information in the database to award in-game currency to your users.
 
 	For more details, see our documentation at: 
-	http://support.playerize.com/entries/22612522-Publishers-Signing-Up-and-Getting-Started
+	http://docs.superrewards.com/v1.0/docs/getting-started
 */
 
 define('APP_SECRET', ''); // App Secret Key. Find it by going to the Apps page, select Edit on the App of your choice, then Integrate.

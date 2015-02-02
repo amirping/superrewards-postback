@@ -6,7 +6,7 @@ Each time a user has completed an Offer or Direct Payment for your App we will s
 
 The script you choose will need to be placed on a web server accessible from the Internet. (Ex: http://www.example.com/app/postback.php)
 
-For more details, see our documentation at: http://support.playerize.com/entries/22612522-Publishers-Signing-Up-and-Getting-Started
+For more details, see our documentation at: http://docs.superrewards.com/v1.0/docs/getting-started
 
 These scripts and all contributions are licensed under the MIT License.
 
