@@ -55,22 +55,22 @@ if(isset($_REQUEST['setup']))
 	PRIMARY KEY (`uid`)) 
 	CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-	try 
-	{
+
 		// Connect to Database.
-		$dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";port=".DB_HOST_PORT, DB_USER, DB_PASSWORD, array( PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ));
+		$dbh = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+		if(!$dbh)
+		{
+			die('Problem connection Check configuration  : ' .mysqli_connect_errno());
+		}
 		$query = $dbh->prepare($query);
-		if(!$query->execute())
+		if(!$execute_query = mysqli_query($dbh,$query))
 			echo "Could not create tables in database: ".DB_NAME." @ ".DB_HOST.'. Check your configuration above.';
 		else
 			echo "Tables setup successfully!";
 
 		$dbh = null;
-	}
-	catch (PDOException $e) 
-	{
-		exit($e->getMessage());
-	}
+	
+	
 
 	exit();
 }
@@ -103,35 +103,25 @@ if($sig == $sig_compare)
 {
 	$timestamp = date("Y-m-d H:i:s", time());
 
-	try 
-	{
 		// Connect to Database.
-		$dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";port=".DB_HOST_PORT, DB_USER, DB_PASSWORD, array( PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ));
-
+	        $dbh = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+		if(!$dbh)
+		{
+			die('Problem connection Check configuration  : ' .mysqli_connect_errno());
+		}
 		// Add new transaction
-		$query = $dbh->prepare("INSERT INTO ".DB_PREFIX."transactions(id, uid, oid, new, time) VALUES (:id,:uid,:oid,:new,:time) ON DUPLICATE KEY UPDATE id=:id,uid=:uid,oid=:oid,new=:new,time=:time");
-		$query->bindParam(':id', $id, PDO::PARAM_INT);
-		$query->bindParam(':uid', $uid, PDO::PARAM_INT);
-		$query->bindParam(':oid', $oid, PDO::PARAM_INT);
-		$query->bindParam(':new', $new, PDO::PARAM_INT);
-		$query->bindParam(':time', $timestamp, PDO::PARAM_STR);
-		if(!$query->execute())
+		$time = $timestamp ; 
+		$query_trns = "INSERT INTO ".DB_PREFIX."transactions(id, uid, oid, new, time) VALUES ($id,$uid,$oid,$new,$time) ON DUPLICATE KEY UPDATE id=$id,uid=$uid,oid=$oid,new=$new,time=$time");
+		if(!$excute_trns = mysqli_query($dbh,$query_trns))
 			$result = 0; // Problems executing SQL. Fail.
 
 		// Add/Update user.
-		$query = $dbh->prepare("INSERT INTO ".DB_PREFIX."users(uid, total, time) VALUES (:uid,:total,:time) ON DUPLICATE KEY UPDATE uid=:uid,total=:total,time=:time");
-		$query->bindParam(':uid', $uid, PDO::PARAM_INT);
-		$query->bindParam(':total', $total, PDO::PARAM_INT);
-		$query->bindParam(':time', $timestamp, PDO::PARAM_STR);
-		if(!$query->execute())
+		$query_usr = "INSERT INTO ".DB_PREFIX."users(uid, total, time) VALUES ($uid,$total,$time) ON DUPLICATE KEY UPDATE uid=$uid,total=$total,time=$time");
+		if(!$excute_usr = mysqli_query($dbh,$query_usr))
 			$result = 0;  // Problems executing SQL. Fail.
 
 		$dbh = null;
-	}
-	catch (PDOException $e) 
-	{
-		exit($e->getMessage());
-	}
+
 }
 else
 	$result = 0; // Security hash incorrect. Fail.
